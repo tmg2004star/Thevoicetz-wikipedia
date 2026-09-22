@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
         tailwind.config = {
@@ -191,7 +193,7 @@
                 <p class="text-xs text-slate-400">Enter password to access media management hub.</p>
             </div>
             <div class="space-y-3 pt-2">
-                <input type="password" id="adminPasswordInput" placeholder="Password " class="w-full px-4 py-3 rounded-xl bg-ocean-950 border border-white/10 text-white text-sm focus:outline-none focus:border-premium-500">
+                <input type="password" id="adminPasswordInput" placeholder="Password" class="w-full px-4 py-3 rounded-xl bg-ocean-950 border border-white/10 text-white text-sm focus:outline-none focus:border-premium-500">
                 <p id="adminLoginError" class="text-red-400 text-xs text-center hidden">Incorrect password. Foundation year is 1994.</p>
                 <button onclick="verifyAdminPassword()" class="w-full py-3 rounded-xl bg-premium-500 text-ocean-950 font-bold text-sm hover:bg-premium-400 transition shadow-lg shadow-premium-500/20">
                     Login to Dashboard
@@ -205,7 +207,7 @@
         <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-5xl w-full border border-white/10 space-y-6 my-auto shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-white/10 pb-4">
                 <div>
-                    <span class="px-2.5 py-1 bg-premium-500/20 text-premium-500 text-[10px] font-bold rounded-full tracking-wider border border-premium-500/30">ADMIN MODE ACTIVE</span>
+                    <span class="px-2.5 py-1 bg-premium-500/20 text-premium-500 text-[10px] font-bold rounded-full tracking-wider border border-premium-500/30">ADMIN MODE ACTIVE (SUPABASE CONNECTED)</span>
                     <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Complete Media Management Hub</h2>
                 </div>
                 <button onclick="closeAdminDashboard()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:text-white border border-white/10">
@@ -214,11 +216,11 @@
             </div>
 
             <p class="text-xs text-slate-300 leading-relaxed">
-                Upload or replace photos for every single historical figure, singer, and event referenced in the official documentation. All modifications are stored securely.
+                Upload or replace photos for every single historical figure, singer, and event referenced in the official documentation. All modifications are saved directly to your Supabase database.
             </p>
 
             <div id="adminSlotsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Dynamically populated slots for all 25+ images via script -->
+                <!-- Dynamically populated slots -->
             </div>
 
             <div class="pt-4 border-t border-white/10 flex justify-end">
@@ -342,7 +344,7 @@
             </div>
         </section>
 
-        <!-- Comprehensive Full History Section (All details from PDF included) -->
+        <!-- Comprehensive Full History Section -->
         <section id="biography" class="py-12 px-4 sm:px-6 max-w-4xl mx-auto space-y-12">
             <div class="text-center space-y-2">
                 <span class="px-3 py-1 bg-premium-500/10 text-premium-500 text-[10px] font-bold rounded-full tracking-widest border border-premium-500/20 uppercase">OFFICIAL COMPREHENSIVE HISTORY</span>
@@ -358,9 +360,6 @@
                 </div>
                 <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
                     The Voice TZ was founded by <strong>Obedi John Mark</strong> together with his young brothers <strong>Daniel John Mark</strong>, <strong>Baraka John Mark</strong>, and <strong>Mark John Mark</strong>. This is one family from Mr. John Mark from Magomeni Kagera in Dar es Salaam. At first, they were not called The Voice TZ. They had a name that was given to them by their father, Mr. John Mark, called <strong>DAMOBA Christian Choir</strong>.
-                </p>
-                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                    Mr. John Mark trained his four children in the art of singing. Obedi and his young brothers were not initially interested in that traditional style of singing; instead, they wanted to explore another style of music. All of them were born into a religious family of Adventists and wanted to sing Adventist songs in a different style of music. At that time, contemporary a cappella music was not common in Tanzania.
                 </p>
                 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
@@ -683,12 +682,15 @@
         </div>
     </footer>
 
-    <!-- JavaScript Handling High-Capacity Storage & Admin Panel -->
+    <!-- JavaScript & Supabase Integration -->
     <script>
-        const DB_NAME = 'VoiceTZ_CompleteDB_v8';
-        const STORE_NAME = 'media_store';
+        // Supabase Credentials
+        const SUPABASE_URL = 'https://oahnonlyxdhaxdofgnbx.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9haG5vbmx5eGRoYXhkb2ZnbmJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwNjgxMDYsImV4cCI6MjEwNTY0NDEwNn0.n5jU6vdRn5kYpaWQPksWWD-qRVRxslG5oPs0glqWhjQ';
 
-        // Master list of all image keys corresponding to every single photo in the documentation
+        // Initialize Supabase Client
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         const allMediaKeys = [
             'header_logo', 'hero_bg', 'obi_founder', 'group_first',
             'hist_obed', 'hist_daniel', 'hist_barakaj', 'hist_mark', 'hist_msafiri',
@@ -731,41 +733,28 @@
             'director': 'Director Jackson Julius'
         };
 
-        function openIndexedDB() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 1);
-                request.onupgradeneeded = function(e) {
-                    const db = e.target.result;
-                    if (!db.objectStoreNames.contains(STORE_NAME)) {
-                        db.createObjectStore(STORE_NAME);
-                    }
-                };
-                request.onsuccess = function(e) { resolve(e.target.result); };
-                request.onerror = function(e) { reject(e.target.error); };
-            });
-        }
-
+        // Function to save media data into Supabase table (assumes a table named 'media_store' with columns 'key' and 'value')
         async function saveMediaRecord(key, dataUrl) {
             try {
-                const db = await openIndexedDB();
-                const tx = db.transaction(STORE_NAME, 'readwrite');
-                const store = tx.objectStore(STORE_NAME);
-                store.put(dataUrl, 'vtz_img_' + key);
+                const { error } = await supabaseClient
+                    .from('media_store')
+                    .upsert({ key: 'vtz_img_' + key, value: dataUrl }, { onConflict: 'key' });
+                if (error) console.error("Supabase Save Error:", error.message);
             } catch (err) {
-                console.error("Storage save error", err);
+                console.error("Error saving to Supabase:", err);
             }
         }
 
+        // Function to fetch media data from Supabase
         async function getMediaRecord(key) {
             try {
-                const db = await openIndexedDB();
-                return new Promise((resolve) => {
-                    const tx = db.transaction(STORE_NAME, 'readonly');
-                    const store = tx.objectStore(STORE_NAME);
-                    const req = store.get('vtz_img_' + key);
-                    req.onsuccess = function() { resolve(req.result); };
-                    req.onerror = function() { resolve(null); };
-                });
+                const { data, error } = await supabaseClient
+                    .from('media_store')
+                    .select('value')
+                    .eq('key', 'vtz_img_' + key)
+                    .single();
+                if (error || !data) return null;
+                return data.value;
             } catch (err) {
                 return null;
             }
@@ -806,7 +795,7 @@
             reader.readAsDataURL(file);
         }
 
-        // Build Admin Dashboard slots dynamically on load
+        // Initialize dashboard and load saved images from Supabase
         window.onload = async function() {
             const container = document.getElementById('adminSlotsContainer');
             if (container) {
@@ -822,7 +811,7 @@
                 `).join('');
             }
 
-            // Restore all saved images from IndexedDB
+            // Load records from Supabase
             for (const key of allMediaKeys) {
                 const savedImage = await getMediaRecord(key);
                 if (savedImage) {
@@ -876,7 +865,6 @@
         }
 
         function updateDOMImage(key, dataUrl) {
-            // Update Public Website DOM
             if (key === 'header_logo') {
                 const logoImg = document.getElementById('headerLogoImg');
                 if (logoImg) logoImg.src = dataUrl;
@@ -890,7 +878,6 @@
                 if (targetImg) targetImg.src = dataUrl;
             }
 
-            // Update Dashboard Thumbnail
             const dashImg = document.getElementById('dash_img_' + key);
             if (dashImg) dashImg.src = dataUrl;
         }
