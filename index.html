@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Voice TZ - Official Acapella History & Heritage</title>
+    
+    <!-- Fonts: Inter for Apple-like clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            950: '#040b14', // Deepest ocean
+                            900: '#081526', // Dark ocean background
+                            800: '#10233b', // Glass panels
+                            700: '#1a3454', // Hover states
+                            600: '#264a73',
+                        },
+                        premium: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#f5c518', // Soft premium yellow (less harsh)
+                            600: '#d9ad14',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #040b14;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 35, 59, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(24, 52, 84, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* iPhone style text gradients */
+        .text-premium-gradient {
+            background: linear-gradient(135deg, #fde047 0%, #f5c518 50%, #d9ad14 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* iOS Glassmorphism Effects */
+        .glass-panel {
+            background: rgba(16, 35, 59, 0.35);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-card {
+            background: rgba(26, 52, 84, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px; /* Highly rounded like iOS apps */
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            background: rgba(26, 52, 84, 0.4);
+            border-color: rgba(245, 197, 24, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.4), 0 0 20px -5px rgba(245, 197, 24, 0.1);
+        }
+        
+        /* iOS style scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Subtle glowing orbs for background depth */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="selection:bg-premium-500 selection:text-ocean-950 min-h-screen flex flex-col relative">
+
+    <!-- Background Orbs -->
+    <div class="glow-orb bg-premium-500 w-96 h-96 top-20 left-0 -translate-x-1/2"></div>
+    <div class="glow-orb bg-blue-500 w-96 h-96 bottom-40 right-0 translate-x-1/3"></div>
+
+    <div class="fixed top-0 inset-x-0 z-50 pt-4 px-4 sm:px-6 pointer-events-none">
+        <header class="max-w-6xl mx-auto glass-panel rounded-full shadow-2xl pointer-events-auto border-white/10 relative">
+            <div class="px-5 py-3 flex items-center justify-between">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3">
+                    <div class="relative group cursor-pointer" onclick="triggerUpload('logo')">
+                        <div id="headerLogoContainer" class="w-10 h-10 rounded-full bg-ocean-700 p-[2px] shadow-lg flex items-center justify-center overflow-hidden border border-white/10">
+                            <img id="headerLogoImg" src="https://placehold.co/200x200/10233b/f5c518?text=VTZ" alt="Logo" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <input type="file" id="input_logo" accept="image/*" class="hidden" onchange="handleFileSelected('logo', event)">
+                    </div>
+                    <div>
+                        <a href="#" class="font-bold text-lg tracking-tight text-white block leading-none">The Voice TZ</a>
+                        <span class="text-[10px] text-ocean-300 font-medium tracking-wide block mt-1">A Cappella Pioneers</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-white transition-colors">About</a>
+                    <a href="#history" class="text-slate-300 hover:text-white transition-colors">History</a>
+                    <a href="#members" class="text-slate-300 hover:text-white transition-colors">Members</a>
+                    <a href="#leadership" class="text-slate-300 hover:text-white transition-colors">Director</a>
+                    <a href="#upload-hub" class="px-5 py-2 rounded-full bg-premium-500 text-ocean-950 hover:bg-premium-400 font-semibold transition-all shadow-md shadow-premium-500/20">
+                        Media Hub
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:text-white focus:outline-none border border-white/10">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Mobile Menu (Floating) -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel mt-2 rounded-3xl p-4 space-y-2 pointer-events-auto border border-white/10">
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-2xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">About</a>
+            <a href="#history" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-2xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">History</a>
+            <a href="#members" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-2xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">Members</a>
+            <a href="#upload-hub" onclick="toggleMobileMenu()" class="block px-4 py-3 text-center rounded-2xl bg-premium-500 text-ocean-950 font-bold">
+                Media Upload Hub
+            </a>
+        </div>
+    </div>
+
+    <main class="flex-grow pt-32 pb-20 relative z-10">
+        
+        <section id="heroSection" class="py-10 lg:py-20 relative rounded-[32px] overflow-hidden my-6 mx-2 sm:mx-6 transition-all duration-500" style="background-image: linear-gradient(rgba(4, 11, 20, 0.85), rgba(4, 11, 20, 0.9)), url('https://placehold.co/1920x1080/081526/f5c518?text=Background+Hero'); background-size: cover; background-position: center;">
+            
+            <!-- Absolute Upload Background Button at Top Right of Hero -->
+            <div class="absolute top-4 right-4 z-20">
+                <button onclick="triggerUpload('hero_bg')" class="px-4 py-2 rounded-full bg-ocean-800/80 hover:bg-ocean-700 text-premium-500 text-xs font-bold border border-premium-500/30 backdrop-blur-md shadow-lg flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-image"></i>
+                    <span>Badili Background</span>
+                </button>
+                <input type="file" id="input_hero_bg" accept="image/*" class="hidden" onchange="handleFileSelected('hero_bg', event)">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Text Content -->
+                    <div class="space-y-8 text-center lg:text-left order-2 lg:order-1">
+                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-ocean-800/80 border border-white/10 text-premium-500 text-xs font-semibold tracking-wide backdrop-blur-md">
+                            <i class="fa-solid fa-music"></i>
+                            <span>Gospel Vocal Harmony • Est. 1994</span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+                            The Voice Of <br>
+                            <span class="text-premium-gradient">A Cappella Gospel.</span>
+                        </h1>
+
+                        <p class="text-lg text-slate-400 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            The premier Tanzanian vocal ensemble from Magomeni. Renowned for rich harmonies, beatboxing, pop-style gospel, and three decades of inspiration.
+                        </p>
+
+                        <!-- iOS Style Info Pills -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                            <div class="glass-card px-5 py-3 rounded-2xl flex items-center space-x-3">
+                                <i class="fa-brands fa-youtube text-red-500 text-xl"></i>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-white leading-tight">51.3K+</span>
+                                    <span class="text-[10px] text-slate-400 uppercase tracking-wide">Subscribers</span>
+                                </div>
+                            </div>
+                            <div class="glass-card px-5 py-3 rounded-2xl flex items-center space-x-3">
+                                <i class="fa-solid fa-eye text-premium-500 text-xl"></i>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-white leading-tight">6.71M+</span>
+                                    <span class="text-[10px] text-slate-400 uppercase tracking-wide">Total Views</span>
+                                </div>
+                            </div>
+                            <div class="glass-card px-5 py-3 rounded-2xl flex items-center space-x-3">
+                                <i class="fa-solid fa-users text-blue-400 text-xl"></i>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-white leading-tight">10</span>
+                                    <span class="text-[10px] text-slate-400 uppercase tracking-wide">Active Vocalists</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Group Photo (Larger & Premium) -->
+                    <div class="order-1 lg:order-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl mx-auto">
+                            <!-- Frame 1 -->
+                            <div class="relative group cursor-pointer" onclick="triggerUpload('group_1')">
+                                <div class="absolute -inset-2 bg-premium-500/10 rounded-[28px] blur-xl group-hover:bg-premium-500/20 transition duration-500"></div>
+                                <div class="relative glass-panel p-2 rounded-[24px] border border-white/10 shadow-2xl">
+                                    <div class="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-ocean-900 flex items-center justify-center">
+                                        <img id="img_group_1" src="https://placehold.co/600x450/10233b/f5c518?text=Photo+1" alt="Group Photo 1" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
+                                        
+                                        <div class="absolute inset-0 bg-ocean-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 backdrop-blur-sm">
+                                            <i class="fa-solid fa-camera text-premium-500 text-2xl mb-2"></i>
+                                            <p class="text-white font-bold text-xs text-center">Upload Photo 1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" id="input_group_1" accept="image/*" class="hidden" onchange="handleFileSelected('group_1', event)">
+                            </div>
+
+                            <!-- Frame 2 -->
+                            <div class="relative group cursor-pointer" onclick="triggerUpload('group_2')">
+                                <div class="absolute -inset-2 bg-premium-500/10 rounded-[28px] blur-xl group-hover:bg-premium-500/20 transition duration-500"></div>
+                                <div class="relative glass-panel p-2 rounded-[24px] border border-white/10 shadow-2xl">
+                                    <div class="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-ocean-900 flex items-center justify-center">
+                                        <img id="img_group_2" src="https://placehold.co/600x450/10233b/f5c518?text=Photo+2" alt="Group Photo 2" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
+                                        
+                                        <div class="absolute inset-0 bg-ocean-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 backdrop-blur-sm">
+                                            <i class="fa-solid fa-camera text-premium-500 text-2xl mb-2"></i>
+                                            <p class="text-white font-bold text-xs text-center">Upload Photo 2</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" id="input_group_2" accept="image/*" class="hidden" onchange="handleFileSelected('group_2', event)">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="glass-card p-6 sm:p-10 rounded-[32px] mb-12 flex flex-col md:flex-row gap-8 items-center bg-ocean-800/20">
+                    <div class="w-16 h-16 rounded-full bg-premium-500/10 border border-premium-500/30 flex items-center justify-center text-premium-500 text-2xl shrink-0 shadow-inner">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Identity & Style</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Their art is characterized by pop-style arrangements with intricate vocal harmonies, scat singing, riffing, vocal percussion, and beatboxing. They produce cover versions of modern pop works and Christmas songs, along with original material. They exclusively minister as a <strong>Gospel Music Ensemble</strong>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="history" class="py-16 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                
+                <div class="text-center space-y-4">
+                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">The Complete Story</h2>
+                    <p class="text-slate-400">Archived historical timeline (1994 - Present)</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- History Cards (Clean Apple Style) -->
+                    <div class="glass-card p-8 space-y-3">
+                        <span class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold rounded-full tracking-widest border border-white/5">CHAPTER 01</span>
+                        <h3 class="text-2xl font-bold text-white">Foundation (1994)</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Founded by Obeid John Mark alongside his brothers Daniel, Baraka, and Mark from Magomeni Kagera. Originally named <strong>DAMOBA Christian Choir</strong> by their father, they transitioned to contemporary a cappella and formed <strong>The Voice Tanzania</strong> in 1994.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 space-y-3">
+                        <span class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold rounded-full tracking-widest border border-white/5">CHAPTER 02</span>
+                        <h3 class="text-2xl font-bold text-white">The 7-Year Ban (2003)</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Approached by the Kilimanjaro Music Awards, their participation created controversy at their home church (Magomeni SDA). This led to a seven-year ban from performing. Obedi cited 1 Corinthians 9:22 to defend reaching audiences outside the church walls.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 space-y-3">
+                        <span class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold rounded-full tracking-widest border border-white/5">CHAPTER 03</span>
+                        <h3 class="text-2xl font-bold text-white">Generational Shifts (2011 - 2021)</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            After a highly successful Tigo advertisement that funded their university education, the group evolved. Melisa John joined in 2011. The 2nd and 3rd generations saw members from Vocapella and Heavenly Singers join, establishing a powerful new vocal dynamic.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="members" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center space-y-4 mb-10">
+                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">The Vocalists</h2>
+                    <p class="text-slate-400 text-lg">The 10 active members of the 4th Generation.</p>
+                </div>
+
+                <!-- 
+                  Larger Grid items: 
+                  Instead of grid-cols-5, we use grid-cols-2 to grid-cols-4 for much larger, clearer photos. 
+                -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+                    
+                    <!-- Singer 1 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_1')">
+                            <img id="img_singer_1" src="https://placehold.co/600x600/10233b/f5c518?text=Obedi" alt="Obedi John Mark" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Obeid John Mark</h4>
+                            <p class="text-premium-500 text-sm font-medium mt-1">Lead & Founder</p>
+                        </div>
+                        <input type="file" id="input_singer_1" accept="image/*" class="hidden" onchange="handleFileSelected('singer_1', event)">
+                    </div>
+
+                    <!-- Singer 2 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_2')">
+                            <img id="img_singer_2" src="https://placehold.co/600x600/10233b/f5c518?text=Baraka" alt="Baraka Mashala" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Baraka Mashala</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Bass Singer</p>
+                        </div>
+                        <input type="file" id="input_singer_2" accept="image/*" class="hidden" onchange="handleFileSelected('singer_2', event)">
+                    </div>
+
+                    <!-- Singer 3 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_3')">
+                            <img id="img_singer_3" src="https://placehold.co/600x600/10233b/f5c518?text=Japhet" alt="Japhet Nicolao" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Japhet Nicolao</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Baritone Singer</p>
+                        </div>
+                        <input type="file" id="input_singer_3" accept="image/*" class="hidden" onchange="handleFileSelected('singer_3', event)">
+                    </div>
+
+                    <!-- Singer 4 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_4')">
+                            <img id="img_singer_4" src="https://placehold.co/600x600/10233b/f5c518?text=Francis" alt="Francis Richard" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Francis Richard</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Tenor</p>
+                        </div>
+                        <input type="file" id="input_singer_4" accept="image/*" class="hidden" onchange="handleFileSelected('singer_4', event)">
+                    </div>
+
+                    <!-- Singer 5 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_5')">
+                            <img id="img_singer_5" src="https://placehold.co/600x600/10233b/f5c518?text=Melisa" alt="Melisa John" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Melisa John</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Mezzo-soprano</p>
+                        </div>
+                        <input type="file" id="input_singer_5" accept="image/*" class="hidden" onchange="handleFileSelected('singer_5', event)">
+                    </div>
+
+                    <!-- Singer 6 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_6')">
+                            <img id="img_singer_6" src="https://placehold.co/600x600/10233b/f5c518?text=Gideon" alt="Gideon Hyera" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Gideon Hyera</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Bass Singer</p>
+                        </div>
+                        <input type="file" id="input_singer_6" accept="image/*" class="hidden" onchange="handleFileSelected('singer_6', event)">
+                    </div>
+
+                    <!-- Singer 7 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_7')">
+                            <img id="img_singer_7" src="https://placehold.co/600x600/10233b/f5c518?text=Yusuph" alt="Yusuph Lameck" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Yusuph Lameck</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Beatbox & Percussion</p>
+                        </div>
+                        <input type="file" id="input_singer_7" accept="image/*" class="hidden" onchange="handleFileSelected('singer_7', event)">
+                    </div>
+
+                    <!-- Singer 8 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_8')">
+                            <img id="img_singer_8" src="https://placehold.co/600x600/10233b/f5c518?text=Goodluck" alt="Goodluck Mbise" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Goodluck Mbise</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Beatbox & Percussion</p>
+                        </div>
+                        <input type="file" id="input_singer_8" accept="image/*" class="hidden" onchange="handleFileSelected('singer_8', event)">
+                    </div>
+
+                    <!-- Singer 9 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_9')">
+                            <img id="img_singer_9" src="https://placehold.co/600x600/10233b/f5c518?text=Baraka" alt="Baraka Yombo" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">Baraka Yombo</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Soprano Singer</p>
+                        </div>
+                        <input type="file" id="input_singer_9" accept="image/*" class="hidden" onchange="handleFileSelected('singer_9', event)">
+                    </div>
+
+                    <!-- Singer 10 -->
+                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30 xl:col-start-2">
+                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_10')">
+                            <img id="img_singer_10" src="https://placehold.co/600x600/10233b/f5c518?text=David" alt="David Sagati" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center w-full">
+                            <h4 class="font-bold text-lg text-white">David Sagati</h4>
+                            <p class="text-slate-400 text-sm font-medium mt-1">Baritone Singer</p>
+                        </div>
+                        <input type="file" id="input_singer_10" accept="image/*" class="hidden" onchange="handleFileSelected('singer_10', event)">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="leadership" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Director Info (Glass Card) -->
+                    <div class="glass-card p-8 sm:p-10 flex flex-col h-full border border-white/10">
+                        <div class="mb-8">
+                            <span class="inline-block px-4 py-1.5 rounded-full bg-ocean-700 text-white text-xs font-bold tracking-wide mb-4 border border-white/10">DIRECTOR & VIDEOGRAPHER</span>
+                            <h3 class="text-3xl font-bold text-white mb-3">Jackson Julius</h3>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                Joined in 2025. Spearheaded a major turning point by elevating the group's audiovisual production and cinematic performance styling to international heights.
+                            </p>
+                        </div>
+                        <div class="mt-auto relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-ocean-900 group cursor-pointer border border-white/10 shadow-lg flex items-center justify-center" onclick="triggerUpload('director')">
+                            <img id="img_director" src="https://placehold.co/800x450/10233b/f5c518?text=Jackson+Julius" alt="Director" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-5 py-2.5 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <input type="file" id="input_director" accept="image/*" class="hidden" onchange="handleFileSelected('director', event)">
+                    </div>
+
+                    <!-- EAGMA Award (Glass Card) -->
+                    <div class="glass-card p-8 sm:p-10 flex flex-col h-full border border-white/10">
+                        <div class="mb-8">
+                            <span class="inline-block px-4 py-1.5 rounded-full bg-premium-500/20 text-premium-500 text-xs font-bold tracking-wide mb-4 border border-premium-500/30">EAGMA AWARD</span>
+                            <h3 class="text-3xl font-bold text-white mb-3">Best A Cappella Group (25/26)</h3>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                In 2025, The Voice TZ won the prestigious East Africa Gospel Music Award, cementing their legacy as top-tier vocalists in the region.
+                            </p>
+                        </div>
+                        <div class="mt-auto relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-ocean-900 group cursor-pointer border border-white/10 shadow-lg flex items-center justify-center" onclick="triggerUpload('award')">
+                            <img id="img_award" src="https://placehold.co/800x450/10233b/f5c518?text=EAGMA+Trophy" alt="Award" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                <span class="px-5 py-2.5 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
+                            </div>
+                        </div>
+                        <input type="file" id="input_award" accept="image/*" class="hidden" onchange="handleFileSelected('award', event)">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Minimal Upload Hub for Quick Access -->
+        <section id="upload-hub" class="py-16 relative border-t border-white/5">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h3 class="text-2xl font-bold text-white mb-2">Media Management</h3>
+                <p class="text-slate-400 text-sm mb-8">Tap on any image above on the page to change it. All uploads are saved locally directly in your browser.</p>
+                <button onclick="window.scrollTo(0,0)" class="px-8 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition backdrop-blur-md border border-white/10">
+                    Scroll up to view
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="glass-panel border-t border-white/10 py-10 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-xl font-bold text-white tracking-tight mb-2">The Voice TZ</h2>
+            <p class="text-slate-500 text-xs max-w-md mx-auto leading-relaxed">
+                Tanzania's premier contemporary gospel A Cappella vocal ensemble. <br>&copy; 1994 – 2026. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // High-Capacity Storage via IndexedDB (Handles the QuotaExceededError)
+        const DB_NAME = 'VoiceTZ_MediaDB_v3';
+        const STORE_NAME = 'media_store';
+
+        function openIndexedDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, 1);
+                request.onupgradeneeded = function(e) {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME);
+                    }
+                };
+                request.onsuccess = function(e) { resolve(e.target.result); };
+                request.onerror = function(e) { reject(e.target.error); };
+            });
+        }
+
+        async function saveMediaRecord(key, dataUrl) {
+            try {
+                const db = await openIndexedDB();
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                store.put(dataUrl, 'vtz_img_' + key);
+                store.put('true', 'vtz_done_' + key);
+            } catch (err) {
+                console.error("Storage save error", err);
+            }
+        }
+
+        async function getMediaRecord(key) {
+            try {
+                const db = await openIndexedDB();
+                return new Promise((resolve) => {
+                    const tx = db.transaction(STORE_NAME, 'readonly');
+                    const store = tx.objectStore(STORE_NAME);
+                    const req = store.get('vtz_img_' + key);
+                    req.onsuccess = function() { resolve(req.result); };
+                    req.onerror = function() { resolve(null); };
+                });
+            } catch (err) {
+                return null;
+            }
+        }
+
+        async function isMediaLocked(key) {
+            try {
+                const db = await openIndexedDB();
+                return new Promise((resolve) => {
+                    const tx = db.transaction(STORE_NAME, 'readonly');
+                    const store = tx.objectStore(STORE_NAME);
+                    const req = store.get('vtz_done_' + key);
+                    req.onsuccess = function() { resolve(req.result === 'true'); };
+                    req.onerror = function() { resolve(false); };
+                });
+            } catch (err) {
+                return false;
+            }
+        }
+
+        // Image compression to prevent any storage crashes
+        function compressAndResizeImage(file, maxWidth, maxHeight, quality, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                    } else {
+                        if (height > maxHeight) {
+                            width = Math.round((width * maxHeight) / height);
+                            height = maxHeight;
+                        }
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                    callback(compressedDataUrl);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        const mediaKeys = [
+            'logo', 'group_1', 'group_2', 'director', 'award',
+            'singer_1', 'singer_2', 'singer_3', 'singer_4', 'singer_5',
+            'singer_6', 'singer_7', 'singer_8', 'singer_9', 'singer_10',
+            'hero_bg'
+        ];
+
+        // Restore images gracefully
+        window.onload = async function() {
+            for (const key of mediaKeys) {
+                const savedImage = await getMediaRecord(key);
+                if (savedImage) {
+                    updateDOMImage(key, savedImage);
+                }
+            }
+        };
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        async function triggerUpload(key) {
+            // One-time silent check
+            const locked = await isMediaLocked(key);
+            if (locked) return; // Ignore clicks if already uploaded once
+
+            const inputEl = document.getElementById('input_' + key);
+            if (inputEl) inputEl.click();
+        }
+
+        async function handleFileSelected(key, event) {
+            const locked = await isMediaLocked(key);
+            if (locked) return;
+
+            const file = event.target.files[0];
+            if (file) {
+                // Compress nicely for storage safety
+                compressAndResizeImage(file, 800, 800, 0.75, async function(compressedDataUrl) {
+                    await saveMediaRecord(key, compressedDataUrl);
+                    updateDOMImage(key, compressedDataUrl);
+                });
+            }
+        }
+
+        function updateDOMImage(key, dataUrl) {
+            if (key === 'logo') {
+                const headerLogo = document.getElementById('headerLogoImg');
+                if (headerLogo) headerLogo.src = dataUrl;
+            } else if (key === 'hero_bg') {
+                const heroSec = document.getElementById('heroSection');
+                if (heroSec) {
+                    heroSec.style.backgroundImage = `linear-gradient(rgba(4, 11, 20, 0.85), rgba(4, 11, 20, 0.9)), url('${dataUrl}')`;
+                }
+            } else {
+                const targetImg = document.getElementById('img_' + key);
+                if (targetImg) targetImg.src = dataUrl;
+            }
+        }
+    </script>
+</body>
+</html>
