@@ -92,12 +92,15 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .img-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: transform 0.5s ease;
         }
 
@@ -140,7 +143,7 @@
                 <!-- Logo & Brand -->
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-ocean-700 p-[2px] shadow-lg flex items-center justify-center overflow-hidden border border-white/10 shrink-0">
-                        <img id="headerLogoImg" src="https://placehold.co/200x200/10233b/f5c518?text=VTZ" alt="Group Logo" class="w-full h-full object-cover rounded-full">
+                        <img id="headerLogoImg" src="https://placehold.co/200x200/10233b/f5c518?text=VTZ" alt="Group Logo" class="w-full h-full object-contain rounded-full">
                     </div>
                     <div>
                         <a href="#" class="font-bold text-sm sm:text-lg tracking-tight text-white block leading-none">The Voice TZ</a>
@@ -684,8 +687,8 @@
 
     <!-- JavaScript & Supabase Integration -->
     <script>
-        // Supabase Credentials
-        const SUPABASE_URL = 'https://oahnonlyxdhaxdofgnbx.supabase.co';
+        // Supabase Credentials (NIMEZIWEKA HAPA)
+        const SUPABASE_URL = 'https://oahnonlyxdhaxdofgnbx.supabase.co'; // Nimeondoa 'rest/v1/' kwa sababu Javascript client inatumia base URL
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9haG5vbmx5eGRoYXhkb2ZnbmJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwNjgxMDYsImV4cCI6MjEwNTY0NDEwNn0.n5jU6vdRn5kYpaWQPksWWD-qRVRxslG5oPs0glqWhjQ';
 
         // Initialize Supabase Client
@@ -733,13 +736,20 @@
             'director': 'Director Jackson Julius'
         };
 
-        // Function to save media data into Supabase table (assumes a table named 'media_store' with columns 'key' and 'value')
+        // Function to save media data into Supabase table
         async function saveMediaRecord(key, dataUrl) {
             try {
+                // Ku-upload/update kwenye table inaitwa 'media_store'
                 const { error } = await supabaseClient
                     .from('media_store')
                     .upsert({ key: 'vtz_img_' + key, value: dataUrl }, { onConflict: 'key' });
-                if (error) console.error("Supabase Save Error:", error.message);
+                
+                if (error) {
+                    console.error("Supabase Save Error:", error.message);
+                    alert("Imeshindwa kusave picha: " + error.message);
+                } else {
+                    console.log("Picha imehifadhiwa kikamilifu Supabase!");
+                }
             } catch (err) {
                 console.error("Error saving to Supabase:", err);
             }
@@ -803,7 +813,7 @@
                     <div class="p-3.5 rounded-2xl bg-ocean-900/60 border border-white/10 flex flex-col items-center text-center">
                         <span class="text-[11px] font-bold text-white mb-2 h-8 flex items-center">${mediaLabels[key] || key}</span>
                         <div class="w-20 h-20 rounded-xl overflow-hidden bg-ocean-950 mb-3 border border-white/10 flex items-center justify-center shrink-0">
-                            <img id="dash_img_${key}" src="https://placehold.co/200x200/10233b/f5c518?text=Photo" class="w-full h-full object-cover">
+                            <img id="dash_img_${key}" src="https://placehold.co/200x200/10233b/f5c518?text=Photo" class="w-full h-full object-contain">
                         </div>
                         <button onclick="triggerAdminUpload('${key}')" class="px-3 py-1.5 rounded-lg bg-premium-500 text-ocean-950 text-xs font-bold hover:bg-premium-400 transition w-full">Change Photo</button>
                         <input type="file" id="input_admin_${key}" accept="image/*" class="hidden" onchange="handleAdminFileSelected('${key}', event)">
@@ -837,6 +847,7 @@
 
         function verifyAdminPassword() {
             const pass = document.getElementById('adminPasswordInput').value;
+            // Password ni 1994 kama ulivyoelekeza
             if (pass === '1994') {
                 closeAdminLogin();
                 document.getElementById('adminDashboardModal').classList.remove('hidden');
@@ -857,9 +868,11 @@
         async function handleAdminFileSelected(key, event) {
             const file = event.target.files[0];
             if (file) {
+                // Tunabanja picha (compress) iwe size nzuri ya Base64 text ili ihifadhike vizuri kwenye database table.
                 compressAndResizeImage(file, 800, 800, 0.75, async function(compressedDataUrl) {
-                    await saveMediaRecord(key, compressedDataUrl);
+                    // Update kwenye DOM papo hapo kisha hifadhi kwenye Supabase
                     updateDOMImage(key, compressedDataUrl);
+                    await saveMediaRecord(key, compressedDataUrl);
                 });
             }
         }
