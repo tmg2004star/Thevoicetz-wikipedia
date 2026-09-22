@@ -2,13 +2,13 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Voice TZ - Official Acapella History & Heritage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Voice TZ - Complete Official History & Biography</title>
     
-    <!-- Fonts: Inter for Apple-like clean typography -->
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -18,16 +18,16 @@
                 extend: {
                     colors: {
                         ocean: {
-                            950: '#040b14', // Deepest ocean
-                            900: '#081526', // Dark ocean background
-                            800: '#10233b', // Glass panels
-                            700: '#1a3454', // Hover states
+                            950: '#040b14',
+                            900: '#081526',
+                            800: '#10233b',
+                            700: '#1a3454',
                             600: '#264a73',
                         },
                         premium: {
                             300: '#fde047',
                             400: '#facc15',
-                            500: '#f5c518', // Soft premium yellow (less harsh)
+                            500: '#f5c518',
                             600: '#d9ad14',
                         }
                     },
@@ -43,47 +43,66 @@
         body {
             background-color: #040b14;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(16, 35, 59, 0.4) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, rgba(16, 35, 59, 0.5) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(24, 52, 84, 0.4) 0px, transparent 50%);
             background-attachment: fixed;
             color: #f8fafc;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
         }
         
-        /* iPhone style text gradients */
         .text-premium-gradient {
             background: linear-gradient(135deg, #fde047 0%, #f5c518 50%, #d9ad14 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        /* iOS Glassmorphism Effects */
         .glass-panel {
-            background: rgba(16, 35, 59, 0.35);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            background: rgba(16, 35, 59, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
         
         .glass-card {
-            background: rgba(26, 52, 84, 0.25);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 24px; /* Highly rounded like iOS apps */
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(26, 52, 84, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
         
         .glass-card:hover {
-            background: rgba(26, 52, 84, 0.4);
-            border-color: rgba(245, 197, 24, 0.2);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.4), 0 0 20px -5px rgba(245, 197, 24, 0.1);
+            background: rgba(26, 52, 84, 0.55);
+            border-color: rgba(245, 197, 24, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(245, 197, 24, 0.15);
         }
-        
-        /* iOS style scrollbar */
+
+        .img-frame {
+            position: relative;
+            background: #081526;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .img-frame:hover img {
+            transform: scale(1.03);
+        }
+
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -94,167 +113,188 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
 
-        /* Subtle glowing orbs for background depth */
         .glow-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
+            filter: blur(90px);
+            opacity: 0.12;
             pointer-events: none;
             z-index: 0;
         }
     </style>
 </head>
-<body class="selection:bg-premium-500 selection:text-ocean-950 min-h-screen flex flex-col relative">
+<body class="selection:bg-premium-500 selection:text-ocean-950 min-h-screen flex flex-col relative w-full overflow-x-hidden">
 
-    <!-- Background Orbs -->
-    <div class="glow-orb bg-premium-500 w-96 h-96 top-20 left-0 -translate-x-1/2"></div>
-    <div class="glow-orb bg-blue-500 w-96 h-96 bottom-40 right-0 translate-x-1/3"></div>
+    <!-- Background Ambient Glows -->
+    <div class="glow-orb bg-premium-500 w-80 h-80 sm:w-[500px] sm:h-[500px] top-10 left-0 -translate-x-1/2"></div>
+    <div class="glow-orb bg-blue-600 w-80 h-80 sm:w-[500px] sm:h-[500px] bottom-1/3 right-0 translate-x-1/3"></div>
 
-    <div class="fixed top-0 inset-x-0 z-50 pt-4 px-4 sm:px-6 pointer-events-none">
+    <!-- Floating Navigation Bar -->
+    <div class="fixed top-0 inset-x-0 z-50 pt-3 px-3 sm:px-6 pointer-events-none">
         <header class="max-w-6xl mx-auto glass-panel rounded-full shadow-2xl pointer-events-auto border-white/10 relative">
-            <div class="px-5 py-3 flex items-center justify-between">
+            <div class="px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
                 
                 <!-- Logo & Brand -->
                 <div class="flex items-center space-x-3">
-                    <div class="relative group cursor-pointer" onclick="triggerUpload('logo')">
-                        <div id="headerLogoContainer" class="w-10 h-10 rounded-full bg-ocean-700 p-[2px] shadow-lg flex items-center justify-center overflow-hidden border border-white/10">
-                            <img id="headerLogoImg" src="https://placehold.co/200x200/10233b/f5c518?text=VTZ" alt="Logo" class="w-full h-full object-cover rounded-full">
-                        </div>
-                        <input type="file" id="input_logo" accept="image/*" class="hidden" onchange="handleFileSelected('logo', event)">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-ocean-700 p-[2px] shadow-lg flex items-center justify-center overflow-hidden border border-white/10 shrink-0">
+                        <img id="headerLogoImg" src="https://placehold.co/200x200/10233b/f5c518?text=VTZ" alt="Group Logo" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div>
-                        <a href="#" class="font-bold text-lg tracking-tight text-white block leading-none">The Voice TZ</a>
-                        <span class="text-[10px] text-ocean-300 font-medium tracking-wide block mt-1">A Cappella Pioneers</span>
+                        <a href="#" class="font-bold text-sm sm:text-lg tracking-tight text-white block leading-none">The Voice TZ</a>
+                        <span class="text-[9px] sm:text-[10px] text-premium-400 font-medium tracking-wide block mt-1">Official A Cappella Ministry</span>
                     </div>
                 </div>
 
                 <!-- Desktop Nav -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="#about" class="text-slate-300 hover:text-white transition-colors">About</a>
-                    <a href="#history" class="text-slate-300 hover:text-white transition-colors">History</a>
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-white transition-colors">Overview</a>
+                    <a href="#biography" class="text-slate-300 hover:text-white transition-colors">Full History</a>
                     <a href="#members" class="text-slate-300 hover:text-white transition-colors">Members</a>
-                    <a href="#leadership" class="text-slate-300 hover:text-white transition-colors">Director</a>
-                    <a href="#upload-hub" class="px-5 py-2 rounded-full bg-premium-500 text-ocean-950 hover:bg-premium-400 font-semibold transition-all shadow-md shadow-premium-500/20">
-                        Media Hub
-                    </a>
+                    <a href="#generations" class="text-slate-300 hover:text-white transition-colors">Generations</a>
+                    <button onclick="openAdminLogin()" class="px-4 py-2 rounded-full bg-ocean-800 hover:bg-ocean-700 text-premium-400 font-semibold transition-all border border-premium-500/30 flex items-center space-x-2 text-xs shadow-md">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Admin Portal</span>
+                    </button>
                 </nav>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:text-white focus:outline-none border border-white/10">
-                        <i class="fa-solid fa-bars"></i>
+                <!-- Mobile Trigger & Admin -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button onclick="openAdminLogin()" class="w-9 h-9 rounded-full bg-ocean-800 flex items-center justify-center text-premium-400 border border-premium-500/30 text-xs shadow-md">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:text-white focus:outline-none border border-white/10">
+                        <i class="fa-solid fa-bars text-base"></i>
                     </button>
                 </div>
             </div>
         </header>
         
-        <!-- Mobile Menu (Floating) -->
-        <div id="mobileMenu" class="hidden md:hidden glass-panel mt-2 rounded-3xl p-4 space-y-2 pointer-events-auto border border-white/10">
-            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-2xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">About</a>
-            <a href="#history" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-2xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">History</a>
-            <a href="#members" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-2xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">Members</a>
-            <a href="#upload-hub" onclick="toggleMobileMenu()" class="block px-4 py-3 text-center rounded-2xl bg-premium-500 text-ocean-950 font-bold">
-                Media Upload Hub
-            </a>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel mt-2 rounded-2xl p-4 space-y-2.5 pointer-events-auto border border-white/10 text-sm shadow-2xl">
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">Overview & Quick Info</a>
+            <a href="#biography" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">Full Comprehensive History</a>
+            <a href="#members" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">Active Vocalists</a>
+            <a href="#generations" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl bg-white/5 text-slate-200 hover:bg-white/10 font-medium">Generational Lineage & Past Members</a>
         </div>
     </div>
 
-    <main class="flex-grow pt-32 pb-20 relative z-10">
-        
-        <section id="heroSection" class="py-10 lg:py-20 relative rounded-[32px] overflow-hidden my-6 mx-2 sm:mx-6 transition-all duration-500" style="background-image: linear-gradient(rgba(4, 11, 20, 0.85), rgba(4, 11, 20, 0.9)), url('https://placehold.co/1920x1080/081526/f5c518?text=Background+Hero'); background-size: cover; background-position: center;">
-            
-            <!-- Absolute Upload Background Button at Top Right of Hero -->
-            <div class="absolute top-4 right-4 z-20">
-                <button onclick="triggerUpload('hero_bg')" class="px-4 py-2 rounded-full bg-ocean-800/80 hover:bg-ocean-700 text-premium-500 text-xs font-bold border border-premium-500/30 backdrop-blur-md shadow-lg flex items-center space-x-2 transition">
-                    <i class="fa-solid fa-image"></i>
-                    <span>Badili Background</span>
-                </button>
-                <input type="file" id="input_hero_bg" accept="image/*" class="hidden" onchange="handleFileSelected('hero_bg', event)">
+    <!-- Admin Authentication Modal -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ocean-950/85 backdrop-blur-md hidden">
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-sm w-full border border-white/10 space-y-4 shadow-2xl relative">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 rounded-full bg-premium-500/10 text-premium-500 flex items-center justify-center mx-auto mb-2 border border-premium-500/20 shadow-inner">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Admin Authentication</h3>
+                <p class="text-xs text-slate-400">Enter password to access media management hub.</p>
             </div>
+            <div class="space-y-3 pt-2">
+                <input type="password" id="adminPasswordInput" placeholder="Password " class="w-full px-4 py-3 rounded-xl bg-ocean-950 border border-white/10 text-white text-sm focus:outline-none focus:border-premium-500">
+                <p id="adminLoginError" class="text-red-400 text-xs text-center hidden">Incorrect password. Foundation year is 1994.</p>
+                <button onclick="verifyAdminPassword()" class="w-full py-3 rounded-xl bg-premium-500 text-ocean-950 font-bold text-sm hover:bg-premium-400 transition shadow-lg shadow-premium-500/20">
+                    Login to Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comprehensive Admin Dashboard Modal -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-ocean-950/90 backdrop-blur-lg hidden overflow-y-auto">
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-5xl w-full border border-white/10 space-y-6 my-auto shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                    <span class="px-2.5 py-1 bg-premium-500/20 text-premium-500 text-[10px] font-bold rounded-full tracking-wider border border-premium-500/30">ADMIN MODE ACTIVE</span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Complete Media Management Hub</h2>
+                </div>
+                <button onclick="closeAdminDashboard()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:text-white border border-white/10">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Upload or replace photos for every single historical figure, singer, and event referenced in the official documentation. All modifications are stored securely.
+            </p>
+
+            <div id="adminSlotsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Dynamically populated slots for all 25+ images via script -->
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex justify-end">
+                <button onclick="closeAdminDashboard()" class="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm transition">
+                    Close Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Website Body -->
+    <main class="flex-grow pt-24 sm:pt-32 pb-16 relative z-10 w-full overflow-hidden">
+        
+        <!-- Hero Section -->
+        <section id="heroSection" class="py-12 lg:py-20 relative rounded-2xl sm:rounded-[32px] overflow-hidden my-4 mx-3 sm:mx-6 transition-all duration-500 shadow-2xl" style="background-image: linear-gradient(rgba(4, 11, 20, 0.90), rgba(4, 11, 20, 0.95)), url('https://placehold.co/1920x1080/081526/f5c518?text=Hero+Background'); background-size: cover; background-position: center;">
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
                     
                     <!-- Text Content -->
-                    <div class="space-y-8 text-center lg:text-left order-2 lg:order-1">
-                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-ocean-800/80 border border-white/10 text-premium-500 text-xs font-semibold tracking-wide backdrop-blur-md">
-                            <i class="fa-solid fa-music"></i>
-                            <span>Gospel Vocal Harmony • Est. 1994</span>
+                    <div class="space-y-6 text-center lg:text-left order-2 lg:order-1">
+                        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-ocean-800/80 border border-white/10 text-premium-500 text-xs font-semibold tracking-wide backdrop-blur-md">
+                            <i class="fa-solid fa-microphone-lines"></i>
+                            <span>Tanzanian A Cappella Gospel Ministry • Est. 1994</span>
                         </div>
 
-                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
-                            The Voice Of <br>
-                            <span class="text-premium-gradient">A Cappella Gospel.</span>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1]">
+                            The Voice <span class="text-premium-gradient">Tanzania</span>
                         </h1>
 
-                        <p class="text-lg text-slate-400 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            The premier Tanzanian vocal ensemble from Magomeni. Renowned for rich harmonies, beatboxing, pop-style gospel, and three decades of inspiration.
+                        <p class="text-sm sm:text-base text-slate-300 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            A premier Tanzanian vocal ensemble from Magomeni, Dar es Salaam. Renowned for pop-style vocal arrangements, harmonies, beatboxing, and spiritual gospel ministration across generations.
                         </p>
 
-                        <!-- iOS Style Info Pills -->
-                        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-                            <div class="glass-card px-5 py-3 rounded-2xl flex items-center space-x-3">
-                                <i class="fa-brands fa-youtube text-red-500 text-xl"></i>
-                                <div class="text-left">
-                                    <span class="block text-sm font-bold text-white leading-tight">51.3K+</span>
-                                    <span class="text-[10px] text-slate-400 uppercase tracking-wide">Subscribers</span>
+                        <!-- Key Metrics -->
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3 pt-2">
+                            <div class="glass-card p-3 rounded-2xl text-center lg:text-left flex flex-col sm:flex-row items-center sm:space-x-3">
+                                <i class="fa-brands fa-youtube text-red-500 text-xl sm:text-2xl mb-1 sm:mb-0"></i>
+                                <div>
+                                    <span class="block text-xs sm:text-sm font-bold text-white leading-tight">51.3K</span>
+                                    <span class="text-[9px] text-slate-400 uppercase tracking-wide">Subscribers</span>
                                 </div>
                             </div>
-                            <div class="glass-card px-5 py-3 rounded-2xl flex items-center space-x-3">
-                                <i class="fa-solid fa-eye text-premium-500 text-xl"></i>
-                                <div class="text-left">
-                                    <span class="block text-sm font-bold text-white leading-tight">6.71M+</span>
-                                    <span class="text-[10px] text-slate-400 uppercase tracking-wide">Total Views</span>
+                            <div class="glass-card p-3 rounded-2xl text-center lg:text-left flex flex-col sm:flex-row items-center sm:space-x-3">
+                                <i class="fa-solid fa-eye text-premium-500 text-xl sm:text-2xl mb-1 sm:mb-0"></i>
+                                <div>
+                                    <span class="block text-xs sm:text-sm font-bold text-white leading-tight">6.71M</span>
+                                    <span class="text-[9px] text-slate-400 uppercase tracking-wide">Views</span>
                                 </div>
                             </div>
-                            <div class="glass-card px-5 py-3 rounded-2xl flex items-center space-x-3">
-                                <i class="fa-solid fa-users text-blue-400 text-xl"></i>
-                                <div class="text-left">
-                                    <span class="block text-sm font-bold text-white leading-tight">10</span>
-                                    <span class="text-[10px] text-slate-400 uppercase tracking-wide">Active Vocalists</span>
+                            <div class="glass-card p-3 rounded-2xl text-center lg:text-left flex flex-col sm:flex-row items-center sm:space-x-3">
+                                <i class="fa-solid fa-award text-blue-400 text-xl sm:text-2xl mb-1 sm:mb-0"></i>
+                                <div>
+                                    <span class="block text-xs sm:text-sm font-bold text-white leading-tight">EAGMA</span>
+                                    <span class="text-[9px] text-slate-400 uppercase tracking-wide">Winner</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Hero Group Photo (Larger & Premium) -->
-                    <div class="order-1 lg:order-2">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl mx-auto">
-                            <!-- Frame 1 -->
-                            <div class="relative group cursor-pointer" onclick="triggerUpload('group_1')">
-                                <div class="absolute -inset-2 bg-premium-500/10 rounded-[28px] blur-xl group-hover:bg-premium-500/20 transition duration-500"></div>
-                                <div class="relative glass-panel p-2 rounded-[24px] border border-white/10 shadow-2xl">
-                                    <div class="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-ocean-900 flex items-center justify-center">
-                                        <img id="img_group_1" src="https://placehold.co/600x450/10233b/f5c518?text=Photo+1" alt="Group Photo 1" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
-                                        
-                                        <div class="absolute inset-0 bg-ocean-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 backdrop-blur-sm">
-                                            <i class="fa-solid fa-camera text-premium-500 text-2xl mb-2"></i>
-                                            <p class="text-white font-bold text-xs text-center">Upload Photo 1</p>
-                                        </div>
-                                    </div>
+                    <!-- Founders & First Generation Visual -->
+                    <div class="order-1 lg:order-2 w-full max-w-md mx-auto">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="img-frame aspect-[4/5]">
+                                <img id="img_obi_founder" src="https://placehold.co/400x500/10233b/f5c518?text=Obedi+John+Mark" alt="Obedi John Mark">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-ocean-950 p-2.5 text-center">
+                                    <span class="text-[11px] font-bold text-white block">Obedi John Mark</span>
+                                    <span class="text-[9px] text-premium-400 block">Founder & Lead</span>
                                 </div>
-                                <input type="file" id="input_group_1" accept="image/*" class="hidden" onchange="handleFileSelected('group_1', event)">
                             </div>
-
-                            <!-- Frame 2 -->
-                            <div class="relative group cursor-pointer" onclick="triggerUpload('group_2')">
-                                <div class="absolute -inset-2 bg-premium-500/10 rounded-[28px] blur-xl group-hover:bg-premium-500/20 transition duration-500"></div>
-                                <div class="relative glass-panel p-2 rounded-[24px] border border-white/10 shadow-2xl">
-                                    <div class="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-ocean-900 flex items-center justify-center">
-                                        <img id="img_group_2" src="https://placehold.co/600x450/10233b/f5c518?text=Photo+2" alt="Group Photo 2" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105">
-                                        
-                                        <div class="absolute inset-0 bg-ocean-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 backdrop-blur-sm">
-                                            <i class="fa-solid fa-camera text-premium-500 text-2xl mb-2"></i>
-                                            <p class="text-white font-bold text-xs text-center">Upload Photo 2</p>
-                                        </div>
-                                    </div>
+                            <div class="img-frame aspect-[4/5]">
+                                <img id="img_group_first" src="https://placehold.co/400x500/10233b/f5c518?text=First+Gen" alt="First Generation">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-ocean-950 p-2.5 text-center">
+                                    <span class="text-[11px] font-bold text-white block">First Generation</span>
+                                    <span class="text-[9px] text-slate-300 block">DAMOBA Choir</span>
                                 </div>
-                                <input type="file" id="input_group_2" accept="image/*" class="hidden" onchange="handleFileSelected('group_2', event)">
                             </div>
                         </div>
                     </div>
@@ -263,301 +303,433 @@
             </div>
         </section>
 
-        <section id="about" class="py-16 relative">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <div class="glass-card p-6 sm:p-10 rounded-[32px] mb-12 flex flex-col md:flex-row gap-8 items-center bg-ocean-800/20">
-                    <div class="w-16 h-16 rounded-full bg-premium-500/10 border border-premium-500/30 flex items-center justify-center text-premium-500 text-2xl shrink-0 shadow-inner">
-                        <i class="fa-solid fa-microphone-lines"></i>
+        <!-- Quick Info & Background Table Section -->
+        <section id="about" class="py-12 px-4 sm:px-6 max-w-5xl mx-auto">
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-premium-500/20 flex items-center justify-center text-premium-500">
+                        <i class="fa-solid fa-circle-info text-lg"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold text-white mb-2">Identity & Style</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            Their art is characterized by pop-style arrangements with intricate vocal harmonies, scat singing, riffing, vocal percussion, and beatboxing. They produce cover versions of modern pop works and Christmas songs, along with original material. They exclusively minister as a <strong>Gospel Music Ensemble</strong>.
-                        </p>
+                        <h2 class="text-lg sm:text-xl font-bold text-white">Background Information Summary</h2>
+                        <p class="text-xs text-slate-400">Official Wikipedia Archive Metadata</p>
                     </div>
                 </div>
 
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div class="p-3.5 rounded-xl bg-ocean-900/50 border border-white/5 flex justify-between items-center">
+                        <span class="text-slate-400 font-medium">Known as</span>
+                        <span class="text-white font-bold">The Voice Tz</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-ocean-900/50 border border-white/5 flex justify-between items-center">
+                        <span class="text-slate-400 font-medium">Origin</span>
+                        <span class="text-white font-bold">Magomeni, Dar es Salaam</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-ocean-900/50 border border-white/5 flex justify-between items-center">
+                        <span class="text-slate-400 font-medium">Genre</span>
+                        <span class="text-white font-bold">A cappella - contemporary gospel music</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-ocean-900/50 border border-white/5 flex justify-between items-center">
+                        <span class="text-slate-400 font-medium">Years Active</span>
+                        <span class="text-white font-bold">1994 – present</span>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-ocean-900/80 border border-white/10 text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    <strong class="text-white block mb-1 font-semibold">Artistic Style:</strong>
+                    Their art is characterized by pop-style arrangements with vocal harmonies, scat singing, riffing, vocal percussion, and beatboxing. They produce cover versions of modern pop works or Christmas songs, sometimes in the form of medleys, along with original material. As a vocal a cappella based Gospel Music Singers group formed in 1994, they perform in different platforms within the country and outside boundaries: Gospel Concerts, Spiritual Congregations, weddings, Corporate Events, and in any function that needs music.
+                </div>
             </div>
         </section>
 
-        <section id="history" class="py-16 relative">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <!-- Comprehensive Full History Section (All details from PDF included) -->
+        <section id="biography" class="py-12 px-4 sm:px-6 max-w-4xl mx-auto space-y-12">
+            <div class="text-center space-y-2">
+                <span class="px-3 py-1 bg-premium-500/10 text-premium-500 text-[10px] font-bold rounded-full tracking-widest border border-premium-500/20 uppercase">OFFICIAL COMPREHENSIVE HISTORY</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">The Complete Chronicle</h2>
+                <p class="text-slate-400 text-xs sm:text-sm">Every historical chapter, milestone, and transition from foundation to present.</p>
+            </div>
+
+            <!-- Chapter 1 -->
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">1. Foundation & DAMOBA Choir (1994)</h3>
+                    <span class="text-xs font-mono text-premium-400">1994</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    The Voice TZ was founded by <strong>Obedi John Mark</strong> together with his young brothers <strong>Daniel John Mark</strong>, <strong>Baraka John Mark</strong>, and <strong>Mark John Mark</strong>. This is one family from Mr. John Mark from Magomeni Kagera in Dar es Salaam. At first, they were not called The Voice TZ. They had a name that was given to them by their father, Mr. John Mark, called <strong>DAMOBA Christian Choir</strong>.
+                </p>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Mr. John Mark trained his four children in the art of singing. Obedi and his young brothers were not initially interested in that traditional style of singing; instead, they wanted to explore another style of music. All of them were born into a religious family of Adventists and wanted to sing Adventist songs in a different style of music. At that time, contemporary a cappella music was not common in Tanzania.
+                </p>
                 
-                <div class="text-center space-y-4">
-                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">The Complete Story</h2>
-                    <p class="text-slate-400">Archived historical timeline (1994 - Present)</p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                    <div class="img-frame aspect-square">
+                        <img id="img_hist_obed" src="https://placehold.co/300x300/10233b/f5c518?text=Obedi" alt="Obedi John Mark">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Obedi John Mark</div>
+                    </div>
+                    <div class="img-frame aspect-square">
+                        <img id="img_hist_daniel" src="https://placehold.co/300x300/10233b/f5c518?text=Daniel" alt="Daniel John Mark">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Daniel John Mark</div>
+                    </div>
+                    <div class="img-frame aspect-square">
+                        <img id="img_hist_barakaj" src="https://placehold.co/300x300/10233b/f5c518?text=Baraka+J." alt="Baraka John Mark">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Baraka John Mark</div>
+                    </div>
+                    <div class="img-frame aspect-square">
+                        <img id="img_hist_mark" src="https://placehold.co/300x300/10233b/f5c518?text=Mark" alt="Mark John Mark">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Mark John Mark</div>
+                    </div>
                 </div>
 
-                <div class="space-y-6">
-                    <!-- History Cards (Clean Apple Style) -->
-                    <div class="glass-card p-8 space-y-3">
-                        <span class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold rounded-full tracking-widest border border-white/5">CHAPTER 01</span>
-                        <h3 class="text-2xl font-bold text-white">Foundation (1994)</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            Founded by Obeid John Mark alongside his brothers Daniel, Baraka, and Mark from Magomeni Kagera. Originally named <strong>DAMOBA Christian Choir</strong> by their father, they transitioned to contemporary a cappella and formed <strong>The Voice Tanzania</strong> in 1994.
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-8 space-y-3">
-                        <span class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold rounded-full tracking-widest border border-white/5">CHAPTER 02</span>
-                        <h3 class="text-2xl font-bold text-white">The 7-Year Ban (2003)</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            Approached by the Kilimanjaro Music Awards, their participation created controversy at their home church (Magomeni SDA). This led to a seven-year ban from performing. Obedi cited 1 Corinthians 9:22 to defend reaching audiences outside the church walls.
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-8 space-y-3">
-                        <span class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold rounded-full tracking-widest border border-white/5">CHAPTER 03</span>
-                        <h3 class="text-2xl font-bold text-white">Generational Shifts (2011 - 2021)</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            After a highly successful Tigo advertisement that funded their university education, the group evolved. Melisa John joined in 2011. The 2nd and 3rd generations saw members from Vocapella and Heavenly Singers join, establishing a powerful new vocal dynamic.
-                        </p>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    In 1994, Obedi, Daniel, Baraka, and Mark introduced contemporary a cappella music to Tanzania, forming The Voice Tanzania from DAMOBA Christian Choir. At first, they had no person who could sing bass. In 1996, while studying at secondary school, they met <strong>Msafiri Saimon</strong>, who subsequently joined the group as a bass singer.
+                </p>
+                <div class="max-w-xs mx-auto pt-2">
+                    <div class="img-frame aspect-[4/3]">
+                        <img id="img_hist_msafiri" src="https://placehold.co/400x300/10233b/f5c518?text=Msafiri+Saimon" alt="Msafiri Saimon">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Msafiri Saimon (Past Bass Singer)</div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="members" class="py-20 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <!-- Chapter 2 -->
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">2. International Tours & Bass Transitions</h3>
+                    <span class="text-xs font-mono text-premium-400">Late 90s - Early 2000s</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Following his arrival, Msafiri Saimon performed with The Voice TZ at churches in different parts of Tanzania. During this period, the group also travelled to Europe for performances, marking its first international tour. Saimon later left because of studies and personal commitments after recording one album.
+                </p>
                 
-                <div class="text-center space-y-4 mb-10">
-                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">The Vocalists</h2>
-                    <p class="text-slate-400 text-lg">The 10 active members of the 4th Generation.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="img-frame aspect-[16/9]">
+                        <img id="img_europe_tour" src="https://placehold.co/600x337/10233b/f5c518?text=Europe+Tour+2007" alt="Europe Tour">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">The Voice TZ performing in Europe (2007)</div>
+                    </div>
+                    <div class="img-frame aspect-[16/9]">
+                        <img id="img_kenya_tour" src="https://placehold.co/600x337/10233b/f5c518?text=Kenya+Performance" alt="Kenya Tour">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Performing in Kenya ("Najivunia Yesu")</div>
+                    </div>
                 </div>
 
-                <!-- 
-                  Larger Grid items: 
-                  Instead of grid-cols-5, we use grid-cols-2 to grid-cols-4 for much larger, clearer photos. 
-                -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                    
-                    <!-- Singer 1 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_1')">
-                            <img id="img_singer_1" src="https://placehold.co/600x600/10233b/f5c518?text=Obedi" alt="Obedi John Mark" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <!-- Overlay -->
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Obeid John Mark</h4>
-                            <p class="text-premium-500 text-sm font-medium mt-1">Lead & Founder</p>
-                        </div>
-                        <input type="file" id="input_singer_1" accept="image/*" class="hidden" onchange="handleFileSelected('singer_1', event)">
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    After Saimon's departure, he was replaced briefly by <strong>Eliud Kweka</strong>, who performed on the Kenya trip before leaving due to personal circumstances. In the early 2000s, Obedi registered <strong>Josire Busee</strong> as a bass singer to replace Eliud Kweka.
+                </p>
+                <div class="max-w-xs mx-auto pt-2">
+                    <div class="img-frame aspect-square">
+                        <img id="img_hist_busee" src="https://placehold.co/300x300/10233b/f5c518?text=Josire+Busee" alt="Josire Busee">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Josire Busee (Past Bass Singer)</div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Singer 2 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_2')">
-                            <img id="img_singer_2" src="https://placehold.co/600x600/10233b/f5c518?text=Baraka" alt="Baraka Mashala" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Baraka Mashala</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Bass Singer</p>
-                        </div>
-                        <input type="file" id="input_singer_2" accept="image/*" class="hidden" onchange="handleFileSelected('singer_2', event)">
+            <!-- Chapter 3 -->
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">3. Kilimanjaro Music Awards & The 7-Year Ban (2003)</h3>
+                    <span class="text-xs font-mono text-premium-400">2003</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    In 2003, The Voice TZ attracted wider public attention and was approached by the organizers of the <strong>Kilimanjaro Music Awards</strong> to participate. Although they did not win an award, participation created controversy within the Magomeni Seventh-day Adventist Church in Dar es Salaam, where they were registered singers.
+                </p>
+
+                <div class="max-w-md mx-auto">
+                    <div class="img-frame aspect-[16/9]">
+                        <img id="img_kilimanjaro_awards" src="https://placehold.co/600x337/10233b/f5c518?text=Kilimanjaro+Music+Awards" alt="Kilimanjaro Awards">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">The Voice TZ at Kilimanjaro Music Awards</div>
                     </div>
+                </div>
 
-                    <!-- Singer 3 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_3')">
-                            <img id="img_singer_3" src="https://placehold.co/600x600/10233b/f5c518?text=Japhet" alt="Japhet Nicolao" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Japhet Nicolao</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Baritone Singer</p>
-                        </div>
-                        <input type="file" id="input_singer_3" accept="image/*" class="hidden" onchange="handleFileSelected('singer_3', event)">
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Due to participating alongside performers of secular music, the church prohibited the group from performing for <strong>seven years</strong>. During this controversy, Obedi John Mark defended their mission using <strong>1 Corinthians 9:22</strong> (becoming "all things to all people" to reach others outside traditional walls), an event now viewed as a milestone in Christian music outreach in Tanzania.
+                </p>
+            </div>
+
+            <!-- Chapter 4 -->
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">4. University Priorities & Tigo Commercial Ad (2007)</h3>
+                    <span class="text-xs font-mono text-premium-400">2007</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    In 2007, all members prioritized university education as mandated by chairperson Obedi John Mark. That same year, the telecommunications company <strong>Tigo</strong> (later rebranded as Yas) contracted the group to provide vocal harmonies for an advertisement. The payment fully covered members' university tuition fees through completion of their studies.
+                </p>
+            </div>
+
+            <!-- Chapter 5 -->
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">5. Generational Shifts & 2017/2021 Lineup Changes</h3>
+                    <span class="text-xs font-mono text-premium-400">2011 - 2021</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    In 2011, <strong>Melissa John</strong> joined as lead singer and tenor after Obedi discovered her vocal talent in a school choir. Over time, founding brothers Daniel, Baraka, and Mark stepped down. In 2017, new members joined: <strong>Omary Mkiwa</strong> (Heavenly Singers), <strong>Daniel Suleiman</strong> (Heroes A Cappella), and brothers <strong>Bernard Chikahola</strong> & <strong>Baretty Mapunda</strong> (Vocapella).
+                </p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div class="img-frame aspect-square">
+                        <img id="img_omary" src="https://placehold.co/300x300/10233b/f5c518?text=Omary+Mkiwa" alt="Omary Mkiwa">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Omary Mkiwa</div>
                     </div>
-
-                    <!-- Singer 4 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_4')">
-                            <img id="img_singer_4" src="https://placehold.co/600x600/10233b/f5c518?text=Francis" alt="Francis Richard" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Francis Richard</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Tenor</p>
-                        </div>
-                        <input type="file" id="input_singer_4" accept="image/*" class="hidden" onchange="handleFileSelected('singer_4', event)">
+                    <div class="img-frame aspect-square">
+                        <img id="img_dan_sule" src="https://placehold.co/300x300/10233b/f5c518?text=Daniel+Sule" alt="Daniel Sule">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Daniel Sule</div>
                     </div>
-
-                    <!-- Singer 5 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_5')">
-                            <img id="img_singer_5" src="https://placehold.co/600x600/10233b/f5c518?text=Melisa" alt="Melisa John" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Melisa John</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Mezzo-soprano</p>
-                        </div>
-                        <input type="file" id="input_singer_5" accept="image/*" class="hidden" onchange="handleFileSelected('singer_5', event)">
+                    <div class="img-frame aspect-square">
+                        <img id="img_bernard" src="https://placehold.co/300x300/10233b/f5c518?text=Bernard" alt="Bernard Chikohola">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Bernard Chikohola</div>
                     </div>
-
-                    <!-- Singer 6 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_6')">
-                            <img id="img_singer_6" src="https://placehold.co/600x600/10233b/f5c518?text=Gideon" alt="Gideon Hyera" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Gideon Hyera</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Bass Singer</p>
-                        </div>
-                        <input type="file" id="input_singer_6" accept="image/*" class="hidden" onchange="handleFileSelected('singer_6', event)">
+                    <div class="img-frame aspect-square">
+                        <img id="img_baretty" src="https://placehold.co/300x300/10233b/f5c518?text=Baretty" alt="Baretty Mapunda">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Baretty Mapunda</div>
                     </div>
+                </div>
 
-                    <!-- Singer 7 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_7')">
-                            <img id="img_singer_7" src="https://placehold.co/600x600/10233b/f5c518?text=Yusuph" alt="Yusuph Lameck" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Yusuph Lameck</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Beatbox & Percussion</p>
-                        </div>
-                        <input type="file" id="input_singer_7" accept="image/*" class="hidden" onchange="handleFileSelected('singer_7', event)">
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    In 2021, Omary, Daniel Suleiman, and Nicholas formed <i>The Trio TZ</i>. Consequently, <strong>Francis Richard</strong> (tenor) and <strong>Baraka Mashala</strong> (bass) joined. Bernard Chikohola left to become a film producer and was replaced by beatboxer <strong>Yusuph Lameck</strong>.
+                </p>
+            </div>
+
+            <!-- Chapter 6 -->
+            <div class="glass-card p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">6. 2025 Milestones & EAGMA Award Triumph</h3>
+                    <span class="text-xs font-mono text-premium-400">2025 - Present</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    In 2025, <strong>David Sagati</strong>, <strong>Victor Vedastus</strong>, and <strong>Baraka Yombo</strong> joined the group. While David, Yusuph, and Baraka Mashala relocated to Mwanza or Finland (Mashala moved with his wife Laura and is replaced locally by <strong>Gideon Hyera</strong>), they all remain active members of The Voice TZ.
+                </p>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    2025 marked a massive turning point with the arrival of <strong>Jackson Julius</strong> as Director and Videographer, elevating production quality. Most notably, The Voice TZ won the prestigious <strong>Best A Cappella Singing Group in East Africa</strong> award organized by <strong>EAGMA</strong> in 2025/2026.
+                </p>
+
+                <div class="max-w-md mx-auto">
+                    <div class="img-frame aspect-[16/9]">
+                        <img id="img_eagma_award_main" src="https://placehold.co/600x337/10233b/f5c518?text=EAGMA+Award" alt="EAGMA Award">
+                        <div class="absolute bottom-0 inset-x-0 bg-ocean-950/90 p-1.5 text-center text-[10px] font-bold text-white">Winning EAGMA Award of Best Acapella in East Africa (2025/2026)</div>
                     </div>
-
-                    <!-- Singer 8 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_8')">
-                            <img id="img_singer_8" src="https://placehold.co/600x600/10233b/f5c518?text=Goodluck" alt="Goodluck Mbise" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Goodluck Mbise</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Beatbox & Percussion</p>
-                        </div>
-                        <input type="file" id="input_singer_8" accept="image/*" class="hidden" onchange="handleFileSelected('singer_8', event)">
-                    </div>
-
-                    <!-- Singer 9 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_9')">
-                            <img id="img_singer_9" src="https://placehold.co/600x600/10233b/f5c518?text=Baraka" alt="Baraka Yombo" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">Baraka Yombo</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Soprano Singer</p>
-                        </div>
-                        <input type="file" id="input_singer_9" accept="image/*" class="hidden" onchange="handleFileSelected('singer_9', event)">
-                    </div>
-
-                    <!-- Singer 10 -->
-                    <div class="glass-card p-5 flex flex-col items-center group relative border-white/5 hover:border-premium-500/30 xl:col-start-2">
-                        <div class="relative w-full aspect-square rounded-[24px] overflow-hidden bg-ocean-900 cursor-pointer shadow-lg border border-white/5 flex items-center justify-center" onclick="triggerUpload('singer_10')">
-                            <img id="img_singer_10" src="https://placehold.co/600x600/10233b/f5c518?text=David" alt="David Sagati" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center w-full">
-                            <h4 class="font-bold text-lg text-white">David Sagati</h4>
-                            <p class="text-slate-400 text-sm font-medium mt-1">Baritone Singer</p>
-                        </div>
-                        <input type="file" id="input_singer_10" accept="image/*" class="hidden" onchange="handleFileSelected('singer_10', event)">
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <section id="leadership" class="py-20 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Active Members Section (10 Vocalists) -->
+        <section id="members" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto space-y-10">
+            <div class="text-center space-y-2">
+                <span class="px-3 py-1 bg-premium-500/10 text-premium-500 text-[10px] font-bold rounded-full tracking-widest border border-premium-500/20 uppercase">4TH GENERATION</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">Active Vocalists (10 Members)</h2>
+                <p class="text-slate-400 text-xs sm:text-sm">The current powerhouse vocal lineup.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    
-                    <!-- Director Info (Glass Card) -->
-                    <div class="glass-card p-8 sm:p-10 flex flex-col h-full border border-white/10">
-                        <div class="mb-8">
-                            <span class="inline-block px-4 py-1.5 rounded-full bg-ocean-700 text-white text-xs font-bold tracking-wide mb-4 border border-white/10">DIRECTOR & VIDEOGRAPHER</span>
-                            <h3 class="text-3xl font-bold text-white mb-3">Jackson Julius</h3>
-                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-                                Joined in 2025. Spearheaded a major turning point by elevating the group's audiovisual production and cinematic performance styling to international heights.
-                            </p>
-                        </div>
-                        <div class="mt-auto relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-ocean-900 group cursor-pointer border border-white/10 shadow-lg flex items-center justify-center" onclick="triggerUpload('director')">
-                            <img id="img_director" src="https://placehold.co/800x450/10233b/f5c518?text=Jackson+Julius" alt="Director" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-5 py-2.5 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <input type="file" id="input_director" accept="image/*" class="hidden" onchange="handleFileSelected('director', event)">
+                <!-- 1 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_1" src="https://placehold.co/300x300/10233b/f5c518?text=Obeid" alt="Obeid John Mark">
                     </div>
-
-                    <!-- EAGMA Award (Glass Card) -->
-                    <div class="glass-card p-8 sm:p-10 flex flex-col h-full border border-white/10">
-                        <div class="mb-8">
-                            <span class="inline-block px-4 py-1.5 rounded-full bg-premium-500/20 text-premium-500 text-xs font-bold tracking-wide mb-4 border border-premium-500/30">EAGMA AWARD</span>
-                            <h3 class="text-3xl font-bold text-white mb-3">Best A Cappella Group (25/26)</h3>
-                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-                                In 2025, The Voice TZ won the prestigious East Africa Gospel Music Award, cementing their legacy as top-tier vocalists in the region.
-                            </p>
-                        </div>
-                        <div class="mt-auto relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-ocean-900 group cursor-pointer border border-white/10 shadow-lg flex items-center justify-center" onclick="triggerUpload('award')">
-                            <img id="img_award" src="https://placehold.co/800x450/10233b/f5c518?text=EAGMA+Trophy" alt="Award" class="w-full h-full object-contain transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-ocean-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                <span class="px-5 py-2.5 bg-white/10 text-white text-sm font-semibold rounded-full border border-white/20"><i class="fa-solid fa-camera mr-2"></i>Upload Photo</span>
-                            </div>
-                        </div>
-                        <input type="file" id="input_award" accept="image/*" class="hidden" onchange="handleFileSelected('award', event)">
-                    </div>
-
+                    <h4 class="font-bold text-sm text-white">Obeid John Mark</h4>
+                    <p class="text-premium-400 text-xs mt-0.5 font-medium">Lead & Founder</p>
                 </div>
+
+                <!-- 2 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_2" src="https://placehold.co/300x300/10233b/f5c518?text=Baraka+M." alt="Baraka Mashala">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Baraka Mashala</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Bass Singer</p>
+                </div>
+
+                <!-- 3 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_3" src="https://placehold.co/300x300/10233b/f5c518?text=Japhet" alt="Japhet Nicolao">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Japhet Nicolao</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Baritone Singer</p>
+                </div>
+
+                <!-- 4 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_4" src="https://placehold.co/300x300/10233b/f5c518?text=Francis" alt="Francis Richard">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Francis Richard</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Tenor</p>
+                </div>
+
+                <!-- 5 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_5" src="https://placehold.co/300x300/10233b/f5c518?text=Melisa" alt="Melisa John">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Melisa John</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Mezzo-Soprano</p>
+                </div>
+
+                <!-- 6 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_6" src="https://placehold.co/300x300/10233b/f5c518?text=Gideon" alt="Gideon Hyera">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Gideon Hyera</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Bass Singer</p>
+                </div>
+
+                <!-- 7 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_7" src="https://placehold.co/300x300/10233b/f5c518?text=Yusuph" alt="Yusuph Lameck">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Yusuph Lameck</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Beatbox & Percussion</p>
+                </div>
+
+                <!-- 8 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_8" src="https://placehold.co/300x300/10233b/f5c518?text=Goodluck" alt="Goodluck Mbise">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Goodluck Mbise</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Beatbox & Percussion</p>
+                </div>
+
+                <!-- 9 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_9" src="https://placehold.co/300x300/10233b/f5c518?text=Baraka+Y." alt="Baraka Yombo">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Baraka Yombo</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Soprano Singer</p>
+                </div>
+
+                <!-- 10 -->
+                <div class="glass-card p-4 flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 xl:col-auto">
+                    <div class="img-frame aspect-square w-full mb-3 rounded-xl">
+                        <img id="img_singer_10" src="https://placehold.co/300x300/10233b/f5c518?text=David" alt="David Sagati">
+                    </div>
+                    <h4 class="font-bold text-sm text-white">David Sagati</h4>
+                    <p class="text-slate-400 text-xs mt-0.5 font-medium">Baritone Singer</p>
+                </div>
+
             </div>
         </section>
 
-        <!-- Minimal Upload Hub for Quick Access -->
-        <section id="upload-hub" class="py-16 relative border-t border-white/5">
-            <div class="max-w-4xl mx-auto px-4 text-center">
-                <h3 class="text-2xl font-bold text-white mb-2">Media Management</h3>
-                <p class="text-slate-400 text-sm mb-8">Tap on any image above on the page to change it. All uploads are saved locally directly in your browser.</p>
-                <button onclick="window.scrollTo(0,0)" class="px-8 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition backdrop-blur-md border border-white/10">
-                    Scroll up to view
-                </button>
+        <!-- Leadership & Generations Archive Section -->
+        <section id="generations" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-10">
+            <div class="text-center space-y-2">
+                <span class="px-3 py-1 bg-premium-500/10 text-premium-500 text-[10px] font-bold rounded-full tracking-widest border border-premium-500/20 uppercase">LEADERSHIP & PAST ROSTER</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Director & Past Members Archive</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Director Card -->
+                <div class="glass-card p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="px-2.5 py-1 bg-ocean-700 text-white text-[10px] font-bold rounded-full">DIRECTOR & VIDEOGRAPHER</span>
+                        <h3 class="text-xl font-bold text-white mt-3 mb-2">Jackson Julius</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Joined in 2025. Spearheaded a major turning point by elevating the group's audiovisual production and cinematic performance styling to international standards.
+                        </p>
+                    </div>
+                    <div class="mt-6 img-frame aspect-[16/9] rounded-xl">
+                        <img id="img_director" src="https://placehold.co/500x281/10233b/f5c518?text=Jackson+Julius" alt="Jackson Julius">
+                    </div>
+                </div>
+
+                <!-- Past Members List Box -->
+                <div class="glass-card p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="px-2.5 py-1 bg-white/10 text-slate-300 text-[10px] font-bold rounded-full">HISTORICAL ROSTER</span>
+                        <h3 class="text-xl font-bold text-white mt-3 mb-2">Past Members</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                            Honoring all artists who laid the foundational building blocks of The Voice TZ:
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-300 bg-ocean-950/60 p-4 rounded-xl border border-white/5">
+                        <div>• Daniel John</div>
+                        <div>• Baraka John</div>
+                        <div>• Mark John</div>
+                        <div>• Msafiri Saimoni</div>
+                        <div>• Johsire Busee</div>
+                        <div>• Eliudi Kweba</div>
+                        <div>• Bernard Chikohola</div>
+                        <div>• Barety Mapunda</div>
+                        <div>• Omary Mkiwa</div>
+                        <div>• Daniel Sule</div>
+                        <div>• Nicholaus</div>
+                        <div>• Victor Vedastus</div>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="glass-panel border-t border-white/10 py-10 text-center relative z-10">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-xl font-bold text-white tracking-tight mb-2">The Voice TZ</h2>
-            <p class="text-slate-500 text-xs max-w-md mx-auto leading-relaxed">
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-white/10 py-8 text-center relative z-10 px-4">
+        <div class="max-w-6xl mx-auto space-y-3">
+            <h2 class="text-base font-bold text-white tracking-tight">The Voice TZ</h2>
+            <p class="text-slate-400 text-xs max-w-md mx-auto leading-relaxed">
                 Tanzania's premier contemporary gospel A Cappella vocal ensemble. <br>&copy; 1994 – 2026. All Rights Reserved.
             </p>
+            <div class="pt-2">
+                <button onclick="openAdminLogin()" class="text-xs text-slate-400 hover:text-white transition underline">
+                    Admin Dashboard Portal Login
+                </button>
+            </div>
         </div>
     </footer>
 
+    <!-- JavaScript Handling High-Capacity Storage & Admin Panel -->
     <script>
-        // High-Capacity Storage via IndexedDB (Handles the QuotaExceededError)
-        const DB_NAME = 'VoiceTZ_MediaDB_v3';
+        const DB_NAME = 'VoiceTZ_CompleteDB_v8';
         const STORE_NAME = 'media_store';
+
+        // Master list of all image keys corresponding to every single photo in the documentation
+        const allMediaKeys = [
+            'header_logo', 'hero_bg', 'obi_founder', 'group_first',
+            'hist_obed', 'hist_daniel', 'hist_barakaj', 'hist_mark', 'hist_msafiri',
+            'europe_tour', 'kenya_tour', 'hist_busee', 'kilimanjaro_awards',
+            'omary', 'dan_sule', 'bernard', 'baretty', 'eagma_award_main',
+            'singer_1', 'singer_2', 'singer_3', 'singer_4', 'singer_5',
+            'singer_6', 'singer_7', 'singer_8', 'singer_9', 'singer_10',
+            'director'
+        ];
+
+        const mediaLabels = {
+            'header_logo': 'Header Logo',
+            'hero_bg': 'Hero Background',
+            'obi_founder': 'Obedi (Hero Frame)',
+            'group_first': 'First Generation',
+            'hist_obed': 'Obedi John Mark',
+            'hist_daniel': 'Daniel John Mark',
+            'hist_barakaj': 'Baraka John Mark',
+            'hist_mark': 'Mark John Mark',
+            'hist_msafiri': 'Msafiri Saimon (Bass)',
+            'europe_tour': 'Europe Tour 2007',
+            'kenya_tour': 'Kenya Tour',
+            'hist_busee': 'Josire Busee (Bass)',
+            'kilimanjaro_awards': 'Kilimanjaro Awards',
+            'omary': 'Omary Mkiwa',
+            'dan_sule': 'Daniel Suleiman',
+            'bernard': 'Bernard Chikohola',
+            'baretty': 'Baretty Mapunda',
+            'eagma_award_main': 'EAGMA Award Trophy',
+            'singer_1': '1. Obeid John Mark',
+            'singer_2': '2. Baraka Mashala',
+            'singer_3': '3. Japhet Nicolao',
+            'singer_4': '4. Francis Richard',
+            'singer_5': '5. Melisa John',
+            'singer_6': '6. Gideon Hyera',
+            'singer_7': '7. Yusuph Lameck',
+            'singer_8': '8. Goodluck Mbise',
+            'singer_9': '9. Baraka Yombo',
+            'singer_10': '10. David Sagati',
+            'director': 'Director Jackson Julius'
+        };
 
         function openIndexedDB() {
             return new Promise((resolve, reject) => {
@@ -579,7 +751,6 @@
                 const tx = db.transaction(STORE_NAME, 'readwrite');
                 const store = tx.objectStore(STORE_NAME);
                 store.put(dataUrl, 'vtz_img_' + key);
-                store.put('true', 'vtz_done_' + key);
             } catch (err) {
                 console.error("Storage save error", err);
             }
@@ -600,22 +771,7 @@
             }
         }
 
-        async function isMediaLocked(key) {
-            try {
-                const db = await openIndexedDB();
-                return new Promise((resolve) => {
-                    const tx = db.transaction(STORE_NAME, 'readonly');
-                    const store = tx.objectStore(STORE_NAME);
-                    const req = store.get('vtz_done_' + key);
-                    req.onsuccess = function() { resolve(req.result === 'true'); };
-                    req.onerror = function() { resolve(false); };
-                });
-            } catch (err) {
-                return false;
-            }
-        }
-
-        // Image compression to prevent any storage crashes
+        // Image compression utility
         function compressAndResizeImage(file, maxWidth, maxHeight, quality, callback) {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -650,16 +806,24 @@
             reader.readAsDataURL(file);
         }
 
-        const mediaKeys = [
-            'logo', 'group_1', 'group_2', 'director', 'award',
-            'singer_1', 'singer_2', 'singer_3', 'singer_4', 'singer_5',
-            'singer_6', 'singer_7', 'singer_8', 'singer_9', 'singer_10',
-            'hero_bg'
-        ];
-
-        // Restore images gracefully
+        // Build Admin Dashboard slots dynamically on load
         window.onload = async function() {
-            for (const key of mediaKeys) {
+            const container = document.getElementById('adminSlotsContainer');
+            if (container) {
+                container.innerHTML = allMediaKeys.map(key => `
+                    <div class="p-3.5 rounded-2xl bg-ocean-900/60 border border-white/10 flex flex-col items-center text-center">
+                        <span class="text-[11px] font-bold text-white mb-2 h-8 flex items-center">${mediaLabels[key] || key}</span>
+                        <div class="w-20 h-20 rounded-xl overflow-hidden bg-ocean-950 mb-3 border border-white/10 flex items-center justify-center shrink-0">
+                            <img id="dash_img_${key}" src="https://placehold.co/200x200/10233b/f5c518?text=Photo" class="w-full h-full object-cover">
+                        </div>
+                        <button onclick="triggerAdminUpload('${key}')" class="px-3 py-1.5 rounded-lg bg-premium-500 text-ocean-950 text-xs font-bold hover:bg-premium-400 transition w-full">Change Photo</button>
+                        <input type="file" id="input_admin_${key}" accept="image/*" class="hidden" onchange="handleAdminFileSelected('${key}', event)">
+                    </div>
+                `).join('');
+            }
+
+            // Restore all saved images from IndexedDB
+            for (const key of allMediaKeys) {
                 const savedImage = await getMediaRecord(key);
                 if (savedImage) {
                     updateDOMImage(key, savedImage);
@@ -672,22 +836,38 @@
             if (menu) menu.classList.toggle('hidden');
         }
 
-        async function triggerUpload(key) {
-            // One-time silent check
-            const locked = await isMediaLocked(key);
-            if (locked) return; // Ignore clicks if already uploaded once
+        function openAdminLogin() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('adminLoginError').classList.add('hidden');
+        }
 
-            const inputEl = document.getElementById('input_' + key);
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminPassword() {
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === '1994') {
+                closeAdminLogin();
+                document.getElementById('adminDashboardModal').classList.remove('hidden');
+            } else {
+                document.getElementById('adminLoginError').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function triggerAdminUpload(key) {
+            const inputEl = document.getElementById('input_admin_' + key);
             if (inputEl) inputEl.click();
         }
 
-        async function handleFileSelected(key, event) {
-            const locked = await isMediaLocked(key);
-            if (locked) return;
-
+        async function handleAdminFileSelected(key, event) {
             const file = event.target.files[0];
             if (file) {
-                // Compress nicely for storage safety
                 compressAndResizeImage(file, 800, 800, 0.75, async function(compressedDataUrl) {
                     await saveMediaRecord(key, compressedDataUrl);
                     updateDOMImage(key, compressedDataUrl);
@@ -696,18 +876,23 @@
         }
 
         function updateDOMImage(key, dataUrl) {
-            if (key === 'logo') {
-                const headerLogo = document.getElementById('headerLogoImg');
-                if (headerLogo) headerLogo.src = dataUrl;
+            // Update Public Website DOM
+            if (key === 'header_logo') {
+                const logoImg = document.getElementById('headerLogoImg');
+                if (logoImg) logoImg.src = dataUrl;
             } else if (key === 'hero_bg') {
                 const heroSec = document.getElementById('heroSection');
                 if (heroSec) {
-                    heroSec.style.backgroundImage = `linear-gradient(rgba(4, 11, 20, 0.85), rgba(4, 11, 20, 0.9)), url('${dataUrl}')`;
+                    heroSec.style.backgroundImage = `linear-gradient(rgba(4, 11, 20, 0.90), rgba(4, 11, 20, 0.95)), url('${dataUrl}')`;
                 }
             } else {
                 const targetImg = document.getElementById('img_' + key);
                 if (targetImg) targetImg.src = dataUrl;
             }
+
+            // Update Dashboard Thumbnail
+            const dashImg = document.getElementById('dash_img_' + key);
+            if (dashImg) dashImg.src = dataUrl;
         }
     </script>
 </body>
